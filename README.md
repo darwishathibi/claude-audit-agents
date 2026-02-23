@@ -1,6 +1,6 @@
 # 🤖 Claude Code Audit Agents
 
-A collection of 7 specialized audit agents for Claude Code, designed for **.NET Core 8 + PostgreSQL** projects. Each agent is a focused expert that performs deep analysis on a specific domain.
+A collection of 8 specialized audit agents for Claude Code, designed for **.NET Core 8 + PostgreSQL** projects. Each agent is a focused expert that performs deep analysis on a specific domain.
 
 ## Agents
 
@@ -12,6 +12,7 @@ A collection of 7 specialized audit agents for Claude Code, designed for **.NET 
 | ⚡ DB Perf Optimizer | `/db-perf-optimizer` | Missing indexes, N+1 queries, slow JOINs, FK integrity |
 | 🔒 Security Auditor | `/security-auditor` | SQL injection, XSS, CSRF, file upload, IDOR, sensitive data exposure |
 | 🧹 Code Cleaner | `/code-cleaner` | Dead code removal, SOLID principles, code smells |
+| ✨ Code Simplifier | `/code-simplifier` | Code clarity, complexity reduction, AI output cleanup, standards enforcement |
 | 📖 Code Explain | `/code-explain` | Code structure explanation, data flow, architecture walkthrough |
 
 ---
@@ -54,7 +55,7 @@ ln -s ~/claude-audit-agents/.claude/commands/*.md .claude/commands/
 
 ### Verify Installation
 
-Open Claude Code in your project directory and type `/`. You should see all 7 agents listed as slash commands.
+Open Claude Code in your project directory and type `/`. You should see all 8 agents listed as slash commands.
 
 ---
 
@@ -84,6 +85,10 @@ Pass arguments to focus the audit on specific files or areas:
 /code-explain Please explain this code: src/Services/PaymentService.cs
 
 /integration-inspector Audit the Didit eKYC integration only
+
+/code-simplifier focus: ai-cleanup
+
+/code-simplifier enforce: camelCase, arrow-functions, ES modules
 ```
 
 ### Combo Audits
@@ -100,8 +105,11 @@ Run multiple agents sequentially for comprehensive coverage:
 # Then: optimize the database
 /db-perf-optimizer
 
-# Finally: clean up the code
+# Then: clean up the code
 /code-cleaner
+
+# Finally: simplify the remaining code
+/code-simplifier
 ```
 
 ### Common Workflows
@@ -112,6 +120,7 @@ Run multiple agents sequentially for comprehensive coverage:
 | Payment integration launch | Payment Sentinel → Integration Inspector | `/payment-sentinel` then `/integration-inspector` |
 | Performance optimization | DB Perf Optimizer | `/db-perf-optimizer` |
 | New team member onboarding | Code Explain | `/code-explain Explain the overall architecture` |
+| Code simplification | Code Cleaner → Code Simplifier | `/code-cleaner` then `/code-simplifier` |
 | Code review prep | Code Cleaner → Security Auditor | `/code-cleaner` then `/security-auditor` |
 | New 3rd-party integration | Integration Inspector | `/integration-inspector Audit the [new service] integration` |
 
@@ -255,6 +264,7 @@ This way your entire team gets the same agents when they clone the repo.
     ├── db-perf-optimizer.md      # Database performance
     ├── security-auditor.md       # Application security (OWASP)
     ├── code-cleaner.md           # Code quality & SOLID
+    ├── code-simplifier.md        # Code clarity & simplification
     └── code-explain.md           # Code explanation
 ```
 
