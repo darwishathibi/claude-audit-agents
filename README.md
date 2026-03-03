@@ -1,6 +1,6 @@
 # 🤖 Claude Code Audit Agents
 
-A collection of 8 specialized audit agents for Claude Code, designed for **.NET Core 8 + PostgreSQL** projects. Each agent is a focused expert that performs deep analysis on a specific domain.
+A collection of 9 specialized audit agents for Claude Code, designed for **.NET Core 8 + PostgreSQL** projects. Each agent is a focused expert that performs deep analysis on a specific domain.
 
 ## Agents
 
@@ -14,6 +14,7 @@ A collection of 8 specialized audit agents for Claude Code, designed for **.NET 
 | 🧹 Code Cleaner | `/code-cleaner` | Dead code removal, SOLID principles, code smells |
 | ✨ Code Simplifier | `/code-simplifier` | Code clarity, complexity reduction, AI output cleanup, standards enforcement |
 | 📖 Code Explain | `/code-explain` | Code structure explanation, data flow, architecture walkthrough |
+| 🧪 Test Auditor | `/test-auditor` | Integration test quality, reliability, coverage gaps, test infrastructure |
 
 ---
 
@@ -55,7 +56,7 @@ ln -s ~/claude-audit-agents/.claude/commands/*.md .claude/commands/
 
 ### Verify Installation
 
-Open Claude Code in your project directory and type `/`. You should see all 8 agents listed as slash commands.
+Open Claude Code in your project directory and type `/`. You should see all 9 agents listed as slash commands.
 
 ---
 
@@ -89,6 +90,10 @@ Pass arguments to focus the audit on specific files or areas:
 /code-simplifier focus: ai-cleanup
 
 /code-simplifier enforce: camelCase, arrow-functions, ES modules
+
+/test-auditor Audit only tests/Integration/PaymentFlowTests.cs
+
+/test-auditor Focus on the auth integration tests
 ```
 
 ### Combo Audits
@@ -104,6 +109,9 @@ Run multiple agents sequentially for comprehensive coverage:
 
 # Then: optimize the database
 /db-perf-optimizer
+
+# Then: check integration test coverage
+/test-auditor
 
 # Then: clean up the code
 /code-cleaner
@@ -123,6 +131,7 @@ Run multiple agents sequentially for comprehensive coverage:
 | Code simplification | Code Cleaner → Code Simplifier | `/code-cleaner` then `/code-simplifier` |
 | Code review prep | Code Cleaner → Security Auditor | `/code-cleaner` then `/security-auditor` |
 | New 3rd-party integration | Integration Inspector | `/integration-inspector Audit the [new service] integration` |
+| Integration test review | Test Auditor | `/test-auditor` |
 
 ---
 
@@ -214,7 +223,6 @@ $ARGUMENTS
 
 | Agent | Focus |
 |-------|-------|
-| 🧪 Test Auditor | Test coverage gaps, flaky tests, missing edge cases |
 | 📦 Docker Inspector | Dockerfile best practices, image size, security |
 | 🔄 CI/CD Auditor | Pipeline security, secret handling, deployment safety |
 | 📊 API Design Reviewer | REST conventions, versioning, pagination, error format |
@@ -265,6 +273,7 @@ This way your entire team gets the same agents when they clone the repo.
     ├── security-auditor.md       # Application security (OWASP)
     ├── code-cleaner.md           # Code quality & SOLID
     ├── code-simplifier.md        # Code clarity & simplification
+    ├── test-auditor.md           # Integration test quality
     └── code-explain.md           # Code explanation
 ```
 
