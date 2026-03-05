@@ -75,7 +75,18 @@ Audit the codebase for dead code, SOLID principle violations, code smells, and m
 - [ ] String concatenation in loops (use `StringBuilder`)
 - [ ] Mutable DTOs where immutable records would be safer
 
-### 8. Architecture & Organization
+### 8. Exception Handling Cleanup for Services
+- [ ] Service methods throwing exceptions for expected null query results (e.g., member not found, no active subscription) — should return null instead
+- [ ] Return types not nullable when the method can legitimately return null
+- [ ] Exceptions used for flow control instead of return values
+- [ ] Missing null-return handling in controllers (should map to `NotFound(...)`)
+- [ ] Pattern enforcement:
+  - Expected null query result → return null (make return type nullable)
+  - Business rule violation → throw `InvalidOperationException`
+  - Bad user input / resource not found by ID → throw `KeyNotFoundException`
+  - Controller: `if (result == null) return NotFound(...)` for null service returns
+
+### 9. Architecture & Organization
 - [ ] Project structure: clear separation of concerns (API, Domain, Infrastructure, etc.)
 - [ ] Circular dependencies between projects/namespaces
 - [ ] Misplaced files: infrastructure code in domain layer, etc.
